@@ -94,7 +94,7 @@
             <p>2024</p>
           </div>
           <ul class = "drop-cont">
-            <li>Represented School at a hacking compettition held by Sinapore Management University (SMU)</li>
+            <li>Represented School at a hacking compettition held by Singapore Management University (SMU)</li>
           </ul>
         </li>
 
@@ -104,7 +104,7 @@
             <p>2025</p>
           </div>
           <ul class = "drop-cont">
-            <li>Represented School at a hacking compettition held by Sinapore Management University (SMU)</li>
+            <li>Represented School at a hacking compettition held by Singapore Management University (SMU)</li>
           </ul>
         </li>
       </ul>

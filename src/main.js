@@ -44,7 +44,7 @@ document.querySelector('#app').innerHTML = `
           <ul class = "drop-cont">
             <li> General Paper: A </li>
             <li> Computing: A </li>
-            <li> Mathetmatics: B </li>
+            <li> Mathematics: B </li>
             <li> Physics: B </li>
             <li> Project Work: Pass </li>
           </ul>

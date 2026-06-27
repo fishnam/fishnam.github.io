@@ -1,3 +1,3 @@
 # cv_main
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/brcqrev/cv_main)
+cv website built with vite and hosted with github

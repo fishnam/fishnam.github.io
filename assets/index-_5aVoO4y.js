@@ -126,7 +126,7 @@
           <ul class = "drop-cont">
             <li>Class elected leadership</li>
             <li>Acted as class representative for the economics subject for two years, directly
-            interfacing with the subject tutor in handling administrative matters and
+            working with the subject tutor in handling administrative matters and
             facilitating lessons</li>
           </ul>
         </li>

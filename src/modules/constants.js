@@ -10,4 +10,13 @@ export const CELL_COLOR = "rgb(0, 183, 235)"
 export const EDGE_COLOR = "rgb(255, 255, 255)"
 export const BOARD_COLOR = "rgb(255, 255, 255)"
 
-export const REFRESH = 100;
+export const FISH = [
+  "0000100000000",
+  "0000110111000",
+  "1100000011100",
+  "0010001100010",
+  "0010001100010",
+  "1100000011100",
+  "0000110111000",
+  "0000100000000",
+];

@@ -1,9 +1,12 @@
-import { BOARD_WIDTH, BOARD_HEIGHT, REFRESH } from './constants.js';
+import { BOARD_WIDTH, BOARD_HEIGHT, FISH } from './constants.js';
 import { Board } from './board.js';
 import { Cell } from './cell.js';
 
+
+
 export class Game {
   #cells = [];
+  refresh = 100;
 
   constructor(canvas) {
     this.canvas = canvas;
@@ -16,12 +19,13 @@ export class Game {
 
   initialize = () => {
     this.initializeCells();
+    this.placeRepeatedPattern(FISH, 5 , 2);
     this.launch();
   };
   lastUpdate = 0;
 
   launch = (timestamp) => {
-    if ((timestamp - this.lastUpdate >= REFRESH) && !this.paused){
+    if ((timestamp - this.lastUpdate >= this.refresh) && !this.paused){
       this.board.drawBackground();
       this.updateCells();
 
@@ -30,7 +34,9 @@ export class Game {
     requestAnimationFrame(this.launch);
   };
 
-  initializeCells = (rand = 1) => {
+ 
+
+  initializeCells = () => {
     for (let i = 0; i < this.board.size.cellNumberX; i++) {
       this.#cells[i] = [];
 
@@ -41,13 +47,56 @@ export class Game {
           j,
           this.board.size.cellSize
         );
-        if (rand === 1){
-          this.#cells[i][j].alive = Math.random() > 0.8;
-        }
         this.#cells[i][j].draw();
       }
     }
   };
+
+  clearBoard = () => {
+  for (let i = 0; i < this.board.size.cellNumberX; i++) {
+    for (let j = 0; j < this.board.size.cellNumberY; j++) {
+      this.#cells[i][j].alive = false;
+    }
+  }
+}
+
+  placeRandomPattern = () => {
+    this.clearBoard();
+    for (let i = 0; i < this.board.size.cellNumberX; i++) {
+      for (let j = 0; j < this.board.size.cellNumberY; j++) {
+        this.#cells[i][j].alive = Math.random() > 0.8;
+      }
+    }
+  }
+
+  placeRepeatedPattern(pattern, gapX = 5, gapY = 2) {
+    const patternHeight = pattern.length;
+    const patternWidth = pattern[0].length;
+
+    this.clearBoard();
+    for (
+      let startY = 0;
+      startY < this.board.size.cellNumberY;
+      startY += patternHeight + gapY
+    ) {
+      for (
+        let startX = 0;
+        startX < this.board.size.cellNumberX;
+        startX += patternWidth + gapX
+      ) {
+        for (let y = 0; y < patternHeight; y++) {
+          for (let x = 0; x < patternWidth; x++) {
+            if (pattern[y][x] === "1") {
+              const cell = this.#cells[startX + x]?.[startY + y];
+              if (cell) {
+                cell.alive = true;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   updateCells = () => {
     for (let i = 0; i < this.board.size.cellNumberX; i++) {
@@ -98,26 +147,33 @@ export class Game {
     this.#cells[x][y].neighbors = aliveNeighborsCount;
   };
 
-  toggle = (x, y) => {
-    const cell = this.#cells[x][y];
-    cell.alive = !cell.alive;
 
-    this.board.drawBackground(); //really bad implementation where it just refreshes on click 
+    toggle = (x, y) => {
+      const cell = this.#cells[x][y];
+      cell.alive = !cell.alive;
 
-    for (let i = 0; i < this.board.size.cellNumberX; i++) {
-        for (let j = 0; j < this.board.size.cellNumberY; j++) {
-            this.#cells[i][j].draw();
-        }
-    }
-  };
+      this.board.drawBackground(); //really bad implementation where it just refreshes on click 
+
+      for (let i = 0; i < this.board.size.cellNumberX; i++) {
+          for (let j = 0; j < this.board.size.cellNumberY; j++) {
+              this.#cells[i][j].draw();
+          }
+      }
+    };
 
   do = (input) => {
     if (input === "c"){
-      this.initializeCells(0);
+      this.initializeCells();
     } else if (input === "r"){
-      this.initializeCells(1);
+      this.placeRandomPattern();
     } else if (input === "p"){
       this.paused = !this.paused;
+    } else if (input === "f"){
+      this.placeRepeatedPattern(FISH, 5 , 2);
+    } else if (input === "-"){
+      this.refresh = Math.max(10, this.refresh - 10);
+    } else if (input === "+"){
+      this.refresh = Math.min(1000, this.refresh + 10);
     }
   }
 }

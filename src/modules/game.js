@@ -19,7 +19,7 @@ export class Game {
 
   initialize = () => {
     this.initializeCells();
-    this.placeRepeatedPattern(FISH, 5 , 2);
+    this.placeRepeatedPattern(FISH);
     this.launch();
   };
   lastUpdate = 0;
@@ -69,7 +69,7 @@ export class Game {
     }
   }
 
-  placeRepeatedPattern(pattern, gapX = 5, gapY = 2) {
+  placeRepeatedPattern(pattern, gapX = 7, gapY = 10) {
     const patternHeight = pattern.length;
     const patternWidth = pattern[0].length;
 
@@ -169,11 +169,11 @@ export class Game {
     } else if (input === "p"){
       this.paused = !this.paused;
     } else if (input === "f"){
-      this.placeRepeatedPattern(FISH, 5 , 2);
-    } else if (input === "-"){
-      this.refresh = Math.max(10, this.refresh - 10);
-    } else if (input === "+"){
-      this.refresh = Math.min(1000, this.refresh + 10);
+      this.placeRepeatedPattern(FISH);
+    } else if (input === "2"){
+      this.refresh = Math.max(0, this.refresh - 100);
+    } else if (input === "1"){
+      this.refresh = Math.min(1000, this.refresh + 100);
     }
   }
 }

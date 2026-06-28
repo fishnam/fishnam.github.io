@@ -34,8 +34,8 @@ document.querySelector('#app').innerHTML = `
       <p>[P] to pause,</p>
       <p>[F] to generate fish,</p>
       <p>[R] to generate random pattern,</p>
-      <p>[+] to speed up,</p>
-      <p>[-] to slow down</p>
+      <p>[2] to speed up,</p>
+      <p>[1] to slow down</p>
     </section>
 
     <section id="info">
